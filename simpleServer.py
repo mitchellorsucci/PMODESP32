@@ -57,8 +57,8 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 			form = cgi.FieldStorage(
 				fp = s.rfile,
 				headers = s.headers,
-				environ = { 'REQUEST_METHOD': 'POST',
-		                 'CONTENT_TYPE': s.headers['Content-Type'],
+				environ = { 'REQUEST_METHOD' : 'POST',
+		                 'CONTENT_TYPE' : s.headers['Content-Type'],
 			})
 
 			if (form["cmd"].value == "stop blinking"):
@@ -72,10 +72,16 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 			s.send_response(302)
 			s.send_header('Location','/')
 			s.end_headers()
+			print s.headers
+			print s.path
+			print s.command
+
+
+
 			return
 
 
 
 httpd = BaseHTTPServer.HTTPServer(('localhost', 4443), MyHandler)
-httpd.socket = ssl.wrap_socket (httpd.socket, certfile='./server.pem', server_side=True)
+httpd.socket = ssl.wrap_socket (httpd.socket, certfile = './server.pem', server_side = True)
 httpd.serve_forever()
