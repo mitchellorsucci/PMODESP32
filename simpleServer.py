@@ -82,6 +82,6 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
 
 
-httpd = BaseHTTPServer.HTTPServer(('localhost', 4443), MyHandler)
+httpd = BaseHTTPServer.HTTPServer(('192.168.1.107', 4443), MyHandler)
 httpd.socket = ssl.wrap_socket (httpd.socket, certfile = './server.pem', server_side = True)
 httpd.serve_forever()
